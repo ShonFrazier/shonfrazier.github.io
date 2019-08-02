@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/tufte.css" />
+  <meta charset="utf-8">
+  <title>Weekend Rustic Ray Tracing - Part 1</title>
+</head>
+
+<body>
+  <h1>Weekend Rustic Ray Tracing - Part 1</h1>
+  <article>
+<section>
+<h2>Introduction</h2>
+<p>If you're at all curious about ray tracing, I recommend starting with Peter Shirley's Ray Tracing Minibooks. In this
+series of posts, I'll be converting the code in Ray Tracing in One Weekend (Book 1 in the series) to Rust. Rather than
+rewrite Mr. Shirley's text, I'll be explaining my implementation choices.</p>
+<p>Each chapter has its own branch: <code>Chapter01</code>, <code>Chapter02</code>, etc. Each chapter branch is the completed code for that
+chapter. The <code>master</code> branch will be the final renderer from the end of the book.</p>
+<p>This little project will then be followed with some modifications to allow the code to render in a web browser.</p>
+</section>
+<section>
+<h3>Chapter 1: Output an image</h3>
+<p>This first chapter is straitforward: output some formatted text. As much as I loves me some operator overloading, I
+really dislike the C++ standard library's use of <code>&lt;&lt;</code> to 'push' things onto a stream. In Rust land, I'll be using
+format strings and passing arguments to fill in the blanks.</p>
+<pre style="background-color:#eff1f5;">
+<span style="background-color:#eff1f5;color:#4f5b66;">print!(&quot;</span><span style="background-color:#eff1f5;color:#a3be8c;">P3</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#d08770;">{} {}</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#a3be8c;">255</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#4f5b66;">&quot;, nx, ny);
+</span></pre>
+<p>The header of the image file is specified in a single line just like the C++ code. Rust looks a bit more succint in
+this case.</p>
+<p>I chose the <code>f32</code> type for no particular reason. As I'm using this exercise to start learning Rust, I'm almost
+transliterating the C++ code. If there's a better/nicer way to cast types or truncate to integers, I haven't learned it
+yet.</p>
+<p>You'll notice that the outer <code>for</code> lets Rust's standard library reverst the list for us to traverse. The C++ code looks
+like a typical <code>for</code> where the 'incrementer' decrements, and the condition just needs to check for the minimum (0 in
+this case.)</p>
+<p>The inner loop is nothing special, just iterate over the values in the (half-open) <code>Range</code> specified by <code>(0..nx)</code>.</p>
+<p>Finally, output the line representing the current pixel.</p>
+</section>
+</article>
+
+  <article>
+    <section>
+      <div>
+      </div>
+    </section>
+  </article>
+</body>
+
+</html>
