@@ -3,8 +3,13 @@
 
 <head>
   <link rel="stylesheet" href="/tufte.css" />
+  <link rel="stylesheet" href="/github-embed.css" />
   <meta charset="utf-8">
   <title>Weekend Rustic Ray Tracing - Part 1</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
+  <script src="/github-embed.min.js"></script>
+
 </head>
 
 <body>
@@ -21,31 +26,40 @@ chapter. The <code>master</code> branch will be the final renderer from the end 
 </section>
 <section>
 <h3>Chapter 1: Output an image</h3>
-<p>This first chapter is straitforward: output some formatted text. As much as I loves me some operator overloading, I
-really dislike the C++ standard library's use of <code>&lt;&lt;</code> to 'push' things onto a stream. In Rust land, I'll be using
-format strings and passing arguments to fill in the blanks.</p>
-<pre style="background-color:#eff1f5;">
-<span style="background-color:#eff1f5;color:#4f5b66;">print!(&quot;</span><span style="background-color:#eff1f5;color:#a3be8c;">P3</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#d08770;">{} {}</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#a3be8c;">255</span><span style="background-color:#eff1f5;color:#96b5b4;">\n</span><span style="background-color:#eff1f5;color:#4f5b66;">&quot;, nx, ny);
-</span></pre>
+<p>Checkout <code>Chapter01</code> and read <code>main.rs</code>. This first chapter is straitforward: output some formatted text. As much as I loves me some operator overloading, I
+really dislike the C++ standard library's use of the left shift operator (<code>&lt;&lt;</code>) to 'push' things onto a stream. In Rust
+land, I'll be using format strings and passing arguments to fill in the blanks.</p>
 <p>The header of the image file is specified in a single line just like the C++ code. Rust looks a bit more succint in
 this case.</p>
+<pre style="background-color:#3b3228;">
+<span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#d0c8c6;">print!(&quot;</span><span style="background-color:#3b3228;color:#beb55b;">P3</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d28b71;">{} {}</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#beb55b;">255</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d0c8c6;">&quot;, nx, ny);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span></pre>
 <p>I chose the <code>f32</code> type for no particular reason. As I'm using this exercise to start learning Rust, I'm almost
 transliterating the C++ code. If there's a better/nicer way to cast types or truncate to integers, I haven't learned it
 yet.</p>
-<p>You'll notice that the outer <code>for</code> lets Rust's standard library reverst the list for us to traverse. The C++ code looks
-like a typical <code>for</code> where the 'incrementer' decrements, and the condition just needs to check for the minimum (0 in
-this case.)</p>
+<p>The C++ code looks like a typical <code>for</code> where the 'incrementer' decrements, and the condition just needs to check for
+the minimum (0 in this case.) In Rust, we'll let the standard library reverse the list for us to traverse.</p>
+<pre style="background-color:#3b3228;">
+<span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> j in (</span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..ny).</span><span style="background-color:#3b3228;color:#7bbda4;">rev</span><span style="background-color:#3b3228;color:#d0c8c6;">() {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span></pre>
 <p>The inner loop is nothing special, just iterate over the values in the (half-open) <code>Range</code> specified by <code>(0..nx)</code>.</p>
+<pre style="background-color:#3b3228;">
+<span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> j in (</span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..ny).</span><span style="background-color:#3b3228;color:#7bbda4;">rev</span><span style="background-color:#3b3228;color:#d0c8c6;">() {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span></pre>
 <p>Finally, output the line representing the current pixel.</p>
-</section>
+<pre style="background-color:#3b3228;">
+<span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#d0c8c6;">print!(&quot;</span><span style="background-color:#3b3228;color:#d28b71;">{} {} {}</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d0c8c6;">&quot;, ir, ig, ib);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span></pre></section>
 </article>
 
-  <article>
-    <section>
-      <div>
-      </div>
-    </section>
-  </article>
 </body>
 
 </html>
