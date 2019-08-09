@@ -49,7 +49,7 @@ the minimum (0 in this case.) In Rust, we'll let the standard library reverse th
 <p>The inner loop is nothing special, just iterate over the values in the (half-open) <code>Range</code> specified by <code>(0..nx)</code>.</p>
 <pre style="background-color:#3b3228;">
 <span style="background-color:#3b3228;color:#d0c8c6;">
-</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> j in (</span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..ny).</span><span style="background-color:#3b3228;color:#7bbda4;">rev</span><span style="background-color:#3b3228;color:#d0c8c6;">() {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> i in </span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..nx {
 </span><span style="background-color:#3b3228;color:#d0c8c6;">
 </span></pre>
 <p>Finally, output the line representing the current pixel.</p>
