@@ -27,9 +27,10 @@ chapter. The <code>master</code> branch will be the final renderer from the end 
 </section>
 <section>
 <h3>Chapter 1: Output an image</h3>
-<p>Checkout <code>Chapter01</code> and read <code>main.rs</code>. This first chapter is straitforward: output some formatted text. As much as I loves me some operator overloading, I
-really dislike the C++ standard library's use of the left shift operator (<code>&lt;&lt;</code>) to 'push' things onto a stream. In Rust
-land, I'll be using format strings and passing arguments to fill in the blanks.</p>
+<p>The entire <code>main</code> function is copied at the bottom of this page. However, if you've clones the repo, checkout
+<code>Chapter01</code> and read <code>main.rs</code>. This first chapter is straitforward: output some formatted text. As much as I loves me
+some operator overloading, I really dislike the C++ standard library's use of the left shift operator (<code>&lt;&lt;</code>) to 'push'
+things onto a stream. In Rust land, I'll be using format strings and passing arguments to fill in the blanks.</p>
 <p>The header of the image file is specified in a single line just like the C++ code. Rust looks a bit more succint in
 this case.</p>
 <pre style="background-color:#3b3228;">
@@ -57,6 +58,32 @@ the minimum (0 in this case.) In Rust, we'll let the standard library reverse th
 <pre style="background-color:#3b3228;">
 <span style="background-color:#3b3228;color:#d0c8c6;">
 </span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#d0c8c6;">print!(&quot;</span><span style="background-color:#3b3228;color:#d28b71;">{} {} {}</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d0c8c6;">&quot;, ir, ig, ib);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span></pre></section>
+<section>
+<p>Here's the completed code for chapter one:</p>
+<pre style="background-color:#3b3228;">
+<span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#a89bb9;">fn </span><span style="background-color:#3b3228;color:#8ab3b5;">main</span><span style="background-color:#3b3228;color:#d0c8c6;">() {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">        </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> nx: </span><span style="background-color:#3b3228;color:#a89bb9;">u8 </span><span style="background-color:#3b3228;color:#d0c8c6;">= </span><span style="background-color:#3b3228;color:#d28b71;">200</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">        </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> ny: </span><span style="background-color:#3b3228;color:#a89bb9;">u8 </span><span style="background-color:#3b3228;color:#d0c8c6;">= </span><span style="background-color:#3b3228;color:#d28b71;">100</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">        </span><span style="background-color:#3b3228;color:#d0c8c6;">print!(&quot;</span><span style="background-color:#3b3228;color:#beb55b;">P3</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d28b71;">{} {}</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#beb55b;">255</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d0c8c6;">&quot;, nx, ny);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">        </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> j in (</span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..ny).</span><span style="background-color:#3b3228;color:#7bbda4;">rev</span><span style="background-color:#3b3228;color:#d0c8c6;">() {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">            </span><span style="background-color:#3b3228;color:#a89bb9;">for</span><span style="background-color:#3b3228;color:#d0c8c6;"> i in </span><span style="background-color:#3b3228;color:#d28b71;">0</span><span style="background-color:#3b3228;color:#d0c8c6;">..nx {
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> r: </span><span style="background-color:#3b3228;color:#a89bb9;">f32 </span><span style="background-color:#3b3228;color:#d0c8c6;">= (i as </span><span style="background-color:#3b3228;color:#a89bb9;">f32</span><span style="background-color:#3b3228;color:#d0c8c6;">) / (nx as </span><span style="background-color:#3b3228;color:#a89bb9;">f32</span><span style="background-color:#3b3228;color:#d0c8c6;">);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> g: </span><span style="background-color:#3b3228;color:#a89bb9;">f32 </span><span style="background-color:#3b3228;color:#d0c8c6;">= (j as </span><span style="background-color:#3b3228;color:#a89bb9;">f32</span><span style="background-color:#3b3228;color:#d0c8c6;">) / (ny as </span><span style="background-color:#3b3228;color:#a89bb9;">f32</span><span style="background-color:#3b3228;color:#d0c8c6;">);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> b: </span><span style="background-color:#3b3228;color:#a89bb9;">f32 </span><span style="background-color:#3b3228;color:#d0c8c6;">= </span><span style="background-color:#3b3228;color:#d28b71;">0.2</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> ir = (r * </span><span style="background-color:#3b3228;color:#d28b71;">255.99</span><span style="background-color:#3b3228;color:#d0c8c6;">) as </span><span style="background-color:#3b3228;color:#a89bb9;">u8</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> ig = (g * </span><span style="background-color:#3b3228;color:#d28b71;">255.99</span><span style="background-color:#3b3228;color:#d0c8c6;">) as </span><span style="background-color:#3b3228;color:#a89bb9;">u8</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#a89bb9;">let</span><span style="background-color:#3b3228;color:#d0c8c6;"> ib = (b * </span><span style="background-color:#3b3228;color:#d28b71;">255.99</span><span style="background-color:#3b3228;color:#d0c8c6;">) as </span><span style="background-color:#3b3228;color:#a89bb9;">u8</span><span style="background-color:#3b3228;color:#d0c8c6;">;
+</span><span style="background-color:#3b3228;color:#d0c8c6;">
+</span><span style="background-color:#3b3228;color:#d0c8c6;">                </span><span style="background-color:#3b3228;color:#d0c8c6;">print!(&quot;</span><span style="background-color:#3b3228;color:#d28b71;">{} {} {}</span><span style="background-color:#3b3228;color:#7bbda4;">\n</span><span style="background-color:#3b3228;color:#d0c8c6;">&quot;, ir, ig, ib);
+</span><span style="background-color:#3b3228;color:#d0c8c6;">            </span><span style="background-color:#3b3228;color:#d0c8c6;">}
+</span><span style="background-color:#3b3228;color:#d0c8c6;">        </span><span style="background-color:#3b3228;color:#d0c8c6;">}
+</span><span style="background-color:#3b3228;color:#d0c8c6;">    </span><span style="background-color:#3b3228;color:#d0c8c6;">}
 </span><span style="background-color:#3b3228;color:#d0c8c6;">
 </span></pre></section>
 </article>
